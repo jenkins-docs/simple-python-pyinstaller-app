@@ -1,0 +1,35 @@
+pipeline {
+    agent none
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'python:3.4-slim'
+                }
+            }
+            steps {
+                sh 'python -m py_compile sources/add2vals.py'
+            }
+        }
+        stage('Test') {
+            agent {
+                docker {
+                    image 'python:3.4-slim'
+                }
+            }
+            steps {
+                sh 'python sources/test_calc.py'
+            }
+        }
+        stage('Deliver') {
+            agent {
+                docker {
+                    image 'cdrx/pyinstaller-linux'
+                }
+            }
+            steps {
+                sh 'pyinstaller --onefile sources/add2vals.py'
+            }
+        }
+    }
+}
