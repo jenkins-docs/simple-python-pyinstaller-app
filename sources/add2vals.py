@@ -20,6 +20,7 @@ if argnumbers != 2 :
     print("")
     print("Usage: 'add2vals X Y' where X and Y are individual values.")
     print("       If add2vals is not in your path, usage is './add2vals X Y'.")
+    print("                                                              asdf asdf asdf asdf")
     print("       If unbundled, usage is 'python add2vals.py X Y'.")
     print("")
     sys.exit(1)
