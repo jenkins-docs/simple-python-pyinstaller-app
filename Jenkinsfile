@@ -14,9 +14,6 @@ pipeline{
                 }
             }
             steps {
-//                checkout scm
-//                env.COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                sh "git rev-parse HEAD"
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py'
             }
         }
