@@ -8,6 +8,8 @@ pipeline{
                 }
             }
             steps {
+                env.COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                sh "echo $env.COMMIT_HASH"
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py'
             }
         }
@@ -42,13 +44,11 @@ pipeline{
                         always {
                             junit 'test-reports/results.xml'
                         }
+
                     }
                 }
-//            steps {
-//                sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py || true'
-//            }
 
-        }
+            }
         }
         stage('Deliver') {
             agent {
@@ -59,11 +59,14 @@ pipeline{
             steps {
                 sh 'pyinstaller --onefile sources/add2vals.py'
                 input message: "Build stage finished.(click to preceded)"
+
             }
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
+                    githubNotify description: 'This is a shorted example',  status: 'SUCCESS'
                 }
+
             }
         }
     }
