@@ -34,6 +34,7 @@ pipeline{
             }
             steps {
                 sh 'pyinstaller --onefile sources/add2vals.py'
+                input message: "Build stage finished.(click to preceded)"
             }
             post {
                 success {
