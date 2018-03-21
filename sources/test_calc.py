@@ -5,6 +5,8 @@ class TestCalc(unittest.TestCase):
     """
     Test the add function from the calc library
     """
+    def test_fail(self):
+        self.assertFalse(True, msg="This is failed test")
 
     def test_add_integers(self):
         """
