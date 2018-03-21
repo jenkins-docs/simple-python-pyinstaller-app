@@ -1,6 +1,12 @@
 pipeline{
-    agent none
+    agent any
     stages {
+            stage('env') {
+                steps {
+                    sh 'printenv'
+                }
+            }
+
         stage('Build') {
             agent {
                 docker {
@@ -8,8 +14,9 @@ pipeline{
                 }
             }
             steps {
-                env.COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                sh "echo $env.COMMIT_HASH"
+//                checkout scm
+//                env.COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                sh "git rev-parse HEAD"
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py'
             }
         }
