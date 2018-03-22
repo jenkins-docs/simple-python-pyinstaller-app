@@ -12,7 +12,8 @@ pipeline{
                 sh 'python -m py_compile sources/webapp.py'
             }
         }
-        stage('Tests') {
+        stage('Test') {
+
             parallel {
                 stage('on centos') {
                     agent {
@@ -50,26 +51,25 @@ pipeline{
                 }
 
             }
-
-            stage('Create Artifacts') {
-                agent {
-                    docker {
-                        image 'cdrx/pyinstaller-linux:python2'
-                    }
-                }
-                steps {
-                    sh 'pip install flask'
-                    sh 'pyinstaller --paths=/usr/lib64/python2.7/site-packages/ --onefile sources/webapp.py'
-                    stash includes: 'dist/webapp', name: 'exec_files'
-
-                }
-                post {
-                    success {
-                        archiveArtifacts 'dist/webapp'
-                    }
-
+        }
+        stage('Create Artifacts') {
+            agent {
+                docker {
+                    image 'cdrx/pyinstaller-linux:python2'
                 }
             }
+            steps {
+                sh 'pip install flask'
+                sh 'pyinstaller --paths=/usr/lib64/python2.7/site-packages/ --onefile sources/webapp.py'
+                stash includes: 'dist/webapp', name: 'exec_files'
+
+            }
+            post {
+                success {
+                    archiveArtifacts 'dist/webapp'
+                }
+
+            }
+        }
         }
     }
-}
