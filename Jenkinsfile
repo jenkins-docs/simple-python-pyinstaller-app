@@ -8,7 +8,8 @@ pipeline{
                 }
             }
             steps {
-                sh 'echo Hello World!'
+                sh 'pip install flask'
+                sh 'python -m py_compile sources/webapp.py'
             }
         }
     }
