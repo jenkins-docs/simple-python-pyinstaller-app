@@ -50,10 +50,10 @@ pipeline {
          "target": "add2vals/${BUILD_NUMBER}/",
          "props": "Integration-Tested=Yes;Performance-Tested=No"
         }
-           ]
-              }"""
-        server.upload(uploadSpec)
-        }
+              ]
+       }"""
+       server.upload(uploadSpec)
+       }
 
 
     }
