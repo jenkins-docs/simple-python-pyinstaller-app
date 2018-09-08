@@ -42,7 +42,7 @@ pipeline {
             }
         }
 	stage ('Publish to Artifactory'){
-    	def server = Artifactory.server 'Default Artifactory Server'
+    	def server = Artifactory.server 'jfrog'
     	def uploadSpec = """{
     	 "files": [
     	{
