@@ -40,6 +40,21 @@ pipeline {
                     archiveArtifacts 'dist/add2vals'
                 }
             }
+	stage ('Publish to Artifactory'){
+    	def server = Artifactory.server 'Default Artifactory Server'
+    	def uploadSpec = """{
+    	 "files": [
+    	{
+     	 "pattern": "dist/add2vals",
+         "target": "add2vals/${BUILD_NUMBER}/",
+         "props": "Integration-Tested=Yes;Performance-Tested=No"
+   }
+           ]
+}"""
+server.upload(uploadSpec)
+}
+
+
         }
     }
 }
