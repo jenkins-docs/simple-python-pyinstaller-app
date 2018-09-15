@@ -48,7 +48,7 @@ pipeline {
     	{
      	 "pattern": "dist/add2vals",
          "target": "add2vals/${BUILD_NUMBER}/",
-         "props": "Integration-Tested=Yes;Performance-Tested=No"
+         "props": "Integration-Tested=No;Performance-Tested=No"
         }
               ]
        }"""
