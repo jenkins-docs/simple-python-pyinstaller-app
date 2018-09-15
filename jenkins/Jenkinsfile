@@ -41,20 +41,6 @@ pipeline {
                 }
             }
         }
-	stage ('Publish to Artifactory'){
-    	def server = Artifactory.server 'jfrog'
-    	def uploadSpec = """{
-    	 "files": [
-    	{
-     	 "pattern": "dist/add2vals",
-         "target": "add2vals/${BUILD_NUMBER}/",
-         "props": "Integration-Tested=No;Performance-Tested=No"
-        }
-              ]
-       }"""
-       server.upload(uploadSpec)
-       }
-
 
     }
 }
