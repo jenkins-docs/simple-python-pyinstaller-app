@@ -1,38 +1,26 @@
 pipeline {
     agent any
     stages {
-        stage("Test") {
+        stage('Build') {
             steps {
-                sh 'echo "Running tests"'
-            }
-        }
-        stage("Build") {
-            steps {
-                sh 'echo "Hello World"'
-                sh '''
-                    echo "Multiline shell steps work too"
-                    ls -lah
-                    pwd
-                   '''
+                echo 'Building'
             }
         }
     }
-    post {
-        always {
-            echo 'This will always run'
+    stage('Test') {
+        steps {
+            echo 'Testing'
         }
-        success {
-            echo 'This will run only if successful'
+    }
+    stage('Deploy - Staging') {
+        steps {
+            sh './deploy staging'
+            sh './run-smoke-tests'
         }
-        failure {
-            echo 'This will run only if failed'
-        }
-        unstable {
-            echo 'This will run only if the run was marked unstable'
-        }
-        changed {
-            echo 'This will run only if the state of the Pipeline has changed'
-            echo 'For example, if the Pipeline was previously failing but is now successful'
+    }
+    stage('Deploy - Production') {
+        steps {
+            sh './deploy production'
         }
     }
 }
