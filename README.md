@@ -1,5 +1,6 @@
 # simple-python-pyinstaller-app
 
+## Notes: Jenkinsfile uses docker image python:2-alpine - I need to determine if this is the best python image
 This repository is for the
 [Build a Python app with PyInstaller](https://jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/)
 tutorial in the [Jenkins User Documentation](https://jenkins.io/doc/).
