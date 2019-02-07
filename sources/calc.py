@@ -8,6 +8,7 @@ in quotes (i.e. as a string).
 
 # If 'value' is not an integer, convert it to a float and failing that, a string.
 # This is the file to calculate the additon of two numbers.
+# this new comment has been added to test the pipeline
 
 
 def conv(value):
