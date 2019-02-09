@@ -21,6 +21,7 @@ def conv(value):
             return str(value)
 
 # The 'add2' function itself
+# This is a function to add two numbers
 def add2(arg1, arg2):
     # Convert 'arg1' and 'arg2' to their appropriate types
     arg1conv = conv(arg1)
