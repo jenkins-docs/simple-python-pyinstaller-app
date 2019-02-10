@@ -16,7 +16,7 @@ RUN $PYTHON -m pip install pyinstaller==$PYINSTALLER_VERSION pyyaml==$PYYAML_VER
  
 #include pyinstaller
 # RUN pip install pyinstaller && \
-    useradd -m -s /bin/bash pyinstaller
+   # useradd -m -s /bin/bash pyinstaller
 # Set the user to use when running a container
 #USER pyinstaller
 
