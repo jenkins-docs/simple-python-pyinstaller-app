@@ -15,4 +15,8 @@ RUN pip install pyinstaller && \
 # Set the user to use when running a container
 USER pyinstaller
 
+# Container will by default run 'pyinstaller --help'
+ENTRYPOINT [ "pyinstaller" ]
+CMD [ "--help" ]
+
 CMD ["gunicorn", "-w 4", "main:app"]
