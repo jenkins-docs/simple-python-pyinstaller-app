@@ -9,7 +9,8 @@ RUN pip install docker-py feedparser nosexcover prometheus_client pycobertura py
 RUN wget -qO /usr/local/bin/qcoverage  https://github.com/qnib/qcoverage/releases/download/v0.1/qcoverage_v0.1_Linux \
  && chmod +x /usr/local/bin/qcoverage
  
-ARG PYINSTALLER_VERSION=3.1.1
+# ARG PYINSTALLER_VERSION=3.1.1
+ARG PYINSTALLER_VERSION=3.3.1
 ARG PYSCHEMA_VERSION=0.6.5
 ARG PYYAML_VERSION=3.12
 # RUN $PYTHON -m pip install pyinstaller==$PYINSTALLER_VERSION pyyaml==$PYYAML_VERSION schema==$PYSCHEMA_VERSION
