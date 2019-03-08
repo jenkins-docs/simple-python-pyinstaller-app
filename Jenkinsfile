@@ -2,29 +2,14 @@ pipeline {
   agent none
   stages {
     stage('Build') {
-      parallel {
-        stage('Build-add2vals') {
-          agent {
-            docker {
-              image 'python:2-alpine'
-            }
-
-          }
-          steps {
-            sh 'python -m py_compile sources/add2vals.py sources/calc.py'
-          }
+      agent {
+        docker {
+          image 'python:2-alpine'
         }
-        stage('Build-logfilemonitor') {
-          agent {
-            docker {
-              image 'python:2-alpine'
-            }
 
-          }
-          steps {
-            sh 'python -m py_compile sources/LogfileMonitor.py'
-          }
-        }
+      }
+      steps {
+        sh 'python -m py_compile sources/add2vals.py sources/calc.py sources/LogfileMonitor.py'
       }
     }
     stage('Test') {
@@ -46,41 +31,22 @@ pipeline {
       }
     }
     stage('Deliver') {
-      parallel {
-        stage('Deliver-add2vals') {
-          agent {
-            docker {
-              image 'richardx/pyinstaller-linux:python2'
-            }
-
-          }
-          post {
-            success {
-              archiveArtifacts 'dist/add2vals'
-
-            }
-
-          }
-          steps {
-            sh 'pyinstaller --onefile sources/add2vals.py'
-          }
+      agent {
+        docker {
+          image 'richardx/pyinstaller-linux:python2'
         }
-        stage('Delivery-logfilemonitor') {
-          agent {
-            docker {
-              image 'richardx/pyinstaller-linux:python2'
-            }
-          }
-          post {
-            success {
-              archiveArtifacts 'dist/LogfileMonitor'
 
-            }
-          }
-          steps {
-            sh 'pyinstaller --onefile sources/LogfileMonitor.py'
-          }
+      }
+      post {
+        success {
+          archiveArtifacts 'dist/add2vals dist/LogfileMonitor'
+
         }
+
+      }
+      steps {
+        sh 'pyinstaller --onefile sources/add2vals.py'
+        sh 'pyinstaller --onefile sources/LogfileMonitor.py'
       }
     }
   }
