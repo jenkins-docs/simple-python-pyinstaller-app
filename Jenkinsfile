@@ -2,14 +2,23 @@ pipeline {
   agent none
   stages {
     stage('Build') {
-      agent {
-        docker {
-          image 'python:2-alpine'
-        }
+      parallel {
+        stage('Build-add2vals') {
+          agent {
+            docker {
+              image 'python:2-alpine'
+            }
 
-      }
-      steps {
-        sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+          }
+          steps {
+            sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+          }
+        }
+        stage('Build-logfilemonitor') {
+          steps {
+            sh 'python -m py_compile sources/LogfileMonitor.py'
+          }
+        }
       }
     }
     stage('Test') {
@@ -31,21 +40,30 @@ pipeline {
       }
     }
     stage('Deliver') {
-      agent {
-        docker {
-          image 'richardx/pyinstaller-linux:python2'
+      parallel {
+        stage('Deliver-add2vals') {
+          agent {
+            docker {
+              image 'richardx/pyinstaller-linux:python2'
+            }
+
+          }
+          post {
+            success {
+              archiveArtifacts 'dist/add2vals'
+
+            }
+
+          }
+          steps {
+            sh 'pyinstaller --onefile sources/add2vals.py'
+          }
         }
-
-      }
-      post {
-        success {
-          archiveArtifacts 'dist/add2vals'
-
+        stage('Delivery-logfilemonitor') {
+          steps {
+            sh 'pyinstaller --onefile sources/LogfileMonitor.py'
+          }
         }
-
-      }
-      steps {
-        sh 'pyinstaller --onefile sources/add2vals.py'
       }
     }
   }
