@@ -70,7 +70,11 @@ pipeline {
             docker {
               image 'richardx/pyinstaller-linux:python2'
             }
+          post {
+            success {
+              archiveArtifacts 'dist/LogfileMonitor'
 
+            }
           }
           steps {
             sh 'pyinstaller --onefile sources/LogfileMonitor.py'
