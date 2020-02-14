@@ -4,17 +4,17 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image ''
+                 
                 }
             }
             steps {
-                sh ''
+               
             }
         }
         stage('Test') { 
             agent {
                 docker {
-                    image '' 
+                    
                 }
             }
             steps {
@@ -22,7 +22,6 @@ pipeline {
             }
             post {
                 always {
-                    junit '' 
                 }
             }
         }
