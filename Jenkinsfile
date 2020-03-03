@@ -36,7 +36,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'pyinstaller-alpine --noconfirm --onefile --clean sources/add2vals.py'
+                sh 'six8/pyinstaller-alpine --noconfirm --onefile --clean sources/add2vals.py'
             }
             post {
                 success {
