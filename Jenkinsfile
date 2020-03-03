@@ -29,6 +29,20 @@ pipeline {
                 }
             }
         }
-        
+        stage('Deliver') {
+            agent {
+                docker {
+                    image 'six8/pyinstaller-alpine'
+                }
+            }
+            steps {
+                sh 'pyinstaller-alpine --noconfirm --onefile --clean sources/add2vals.py'
+            }
+            post {
+                success {
+                    archiveArtifacts 'dist/add2vals'
+                }
+            }
+        }
     }
 }
