@@ -19,4 +19,4 @@ you'll be creating yourself during the tutorial.
 
 This is sample test project
 
-Test 1
+Test 2
