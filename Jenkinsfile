@@ -34,6 +34,8 @@ pipeline {
                 IMAGE = 'cdrx/pyinstaller-linux:python2'
             }
             when { tag "release-*" }
+            echo 'printing'
+            echo tag
             steps {
                 dir(path: env.BUILD_ID) {
                     unstash(name: 'compiled-results')
