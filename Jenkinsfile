@@ -33,7 +33,6 @@ pipeline {
                 VOLUME = '$(pwd)/sources:/src'
                 IMAGE = 'cdrx/pyinstaller-linux:python2'
             }
-            when { tag "release-*" }
             steps {
                 dir(path: env.BUILD_ID) {
                     unstash(name: 'compiled-results')
