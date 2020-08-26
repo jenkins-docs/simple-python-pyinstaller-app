@@ -53,7 +53,7 @@ pipeline {
                     sshagent (credentials: ['jenkins-generated-ssh-key']) {
                         sh 'git push --tags'
                     }
-
+                }
             }
         }
     }
