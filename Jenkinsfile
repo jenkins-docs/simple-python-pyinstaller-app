@@ -49,9 +49,9 @@ pipeline {
         stage("Tag and Push") {
             agent any
             steps {
-                sshagent (credentials : ['git-credentials-id']) {
-                    sh 'git push --tags'
-                }
+                git branch: 'master', credentialsId: 'git-credentials-id', url: 'https://github.com/paolarozo/simple-python-pyinstaller-app.git'
+                sh 'git push --tags'
+
             }
         }
     }
