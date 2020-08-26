@@ -49,9 +49,9 @@ pipeline {
         stage("Tag and Push") {
             agent any
             steps {
-                git branch: 'master', credentialsId: 'git-credentials-id', url: 'https://github.com/paolarozo/simple-python-pyinstaller-app.git'
-                sh 'git push --tags'
-
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'git-credentials-id', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh("git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@simple-java-maven-app.git --tags")
+                }
             }
         }
     }
