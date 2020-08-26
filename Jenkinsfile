@@ -47,6 +47,7 @@ pipeline {
             }
         }
         stage("Tag and Push") {
+            agent any
             steps {
                 sh 'git push --tags'
             }
