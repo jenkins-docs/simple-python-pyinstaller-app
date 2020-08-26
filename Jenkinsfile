@@ -8,6 +8,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'pip install -r requirements.txt'
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py'
                 stash(name: 'compiled-results', includes: 'sources/*.py*')
             }
@@ -50,6 +51,7 @@ pipeline {
             agent any
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'git-credentials-id', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+                    sh("python sources/git_tagging.py  ${env.GIT_USERNAME} ${env.GIT_PASSWORD} simple-python-pyinstaller-app")
                     sh("git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/paolarozo/simple-python-pyinstaller-app.git --tags")
                 }
             }
