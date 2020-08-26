@@ -50,7 +50,7 @@ pipeline {
             agent any
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'git-credentials-id', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
-                    sh("git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@simple-java-maven-app.git --tags")
+                    sh("git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/paolarozo/simple-python-pyinstaller-app.git --tags")
                 }
             }
         }
