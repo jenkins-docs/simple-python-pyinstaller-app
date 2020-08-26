@@ -47,7 +47,6 @@ pipeline {
             }
         }
         stage("Tag and Push") {
-            when { branch 'master' }
             steps {
                 steps {
                     sshagent (credentials: ['jenkins-generated-ssh-key']) {
