@@ -47,8 +47,10 @@ pipeline {
             }
         }
         stage("Tag and Push") {
-            sshagent(['git-credentials-id']) {
-                sh 'git push --tags'
+            steps {
+                sshagent(['git-credentials-id']) {
+                    sh 'git push --tags'
+                }
             }
         }
     }
