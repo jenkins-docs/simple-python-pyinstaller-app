@@ -5,7 +5,6 @@ pipeline {
             agent {
                 docker {
                     image 'python:2-alpine'
-                    registryUrl 'https://hub.docker.com/'
                 }
             }
             steps {
