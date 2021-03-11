@@ -1,5 +1,8 @@
 pipeline {
-    agent none 
+    agent none
+    environment {
+       PATH = "$PATH:/usr/local/bin"
+    }
     stages {
         stage('Build') { 
             agent {
