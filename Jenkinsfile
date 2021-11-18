@@ -23,8 +23,8 @@ pipeline {
             post {
                 always {
                     mail to:"ouaazs@algonquincollege.com",
-                    subject:"STATUS FOR PROJECT: ${currentBuild.fullDisplayName}",
-                    body: "RESULT: ${currentBuild.result}"  
+                    subject:"STATUS FOR PROJECT: ${currentBuild.fullDisplayName}",
+                    body: "RESULT: ${currentBuild.result}"  
                 }
             }
         }
