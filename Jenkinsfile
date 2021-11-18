@@ -1,7 +1,5 @@
 pipeline {
     agent none
-    // Scan for SCM changes at 10-minute intervals
-    triggers { pollSCM(*/10 * * * *) }
 
     stages {
         stage('Build') {
