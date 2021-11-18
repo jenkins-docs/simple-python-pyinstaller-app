@@ -24,7 +24,7 @@ pipeline {
                 always {
                     mail to:"ouaazs@algonquincollege.com",
                     subject:"STATUS FOR PROJECT: ${currentBuild.fullDisplayName}",
-                    body: "RESULT: ${currentBuild.result}"  
+                    body: "RESULT: ${currentBuild.result}"
                 }
             }
         }
