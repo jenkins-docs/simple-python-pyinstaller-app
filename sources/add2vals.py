@@ -9,6 +9,7 @@ import calc
 # Some Comment here
 # even more 
 # even more 
+# check triggers
 
 argnumbers = len(sys.argv) - 1
 
