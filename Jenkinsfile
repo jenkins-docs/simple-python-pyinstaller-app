@@ -22,8 +22,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'test-reports/results.xml' //4
-                    mail to:"buildAdmin@mycompany.com",
+                    mail to:"ouaazs@algonquincollege.com",
                     subject:"STATUS FOR PROJECT: ${currentBuild.fullDisplayName}",
                     body: "RESULT: ${currentBuild.result}"  
                 }
