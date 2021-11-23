@@ -8,7 +8,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'python -m py_compile sources/helloworld.py' 
+                sh 'python -m py_compile sources/helloWorld.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }
         }
