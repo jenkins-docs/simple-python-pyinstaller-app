@@ -5,8 +5,10 @@ the calc.py library's 'add2' function.
 
 import sys
 import calc
+import requests
 
 argnumbers = len(sys.argv) - 1
+r =requests.get('https://xkcd.com/1906/')
 
 if argnumbers == 2 :
     print("")
