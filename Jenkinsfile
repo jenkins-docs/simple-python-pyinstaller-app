@@ -1,6 +1,30 @@
 pipeline {
     agent none 
     stages {
+
+        stage('FindHTTPCalls') {
+            agent {
+                docker {
+                    image 'maven:3.8.1-adoptopenjdk-11'  
+                }
+            }
+            environment {
+                HTTPCALLS = """${sh(
+                        returnStdout: true,
+                        script: 'find ./sources -path "*.py" -exec grep -H -e "http://" {} \\;'
+                    )}"""
+            }
+            steps {
+                script {
+                    if (env.HTTPCALLS?.trim()) {
+                        currentBuild.result = 'ABORTED'
+                        error("Aborting the build for http calls.")
+                    }
+                    
+                }
+            }
+        }
+
         stage('Build') { 
             agent {
                 docker {
