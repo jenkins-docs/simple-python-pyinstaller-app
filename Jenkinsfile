@@ -5,7 +5,7 @@ pipeline {
         stage('FindHTTPCalls') {
             agent {
                 docker {
-                    image 'maven:3.8.1-adoptopenjdk-11'  
+                    image 'alpine:3.14'  
                 }
             }
             environment {
