@@ -1,0 +1,4 @@
+workflow:
+  rules:
+  - if: "$CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH"
+  - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_TAG =~ /^release\/((common|ci|qa|staging|uat|production)\/)?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
