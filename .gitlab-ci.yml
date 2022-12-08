@@ -9,3 +9,6 @@ service:
     refs:
     - tags
     - branches
+ trigger:
+    forward:
+      yaml_variables: true
