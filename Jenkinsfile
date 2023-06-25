@@ -1,23 +1,17 @@
-pipeline {
-    agent none
-    stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'python:2-alpine'
-                }
-            }
-            steps {
+node {
+    stage('Build') {
+        docker {
+            image 'python:2-alpine'
+            stage('Build') {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py'
             }
         }
-        stage('Test') {
-            agent {
-                docker {
-                    image 'qnib/pytest'
-                }
-            }
-            steps {
+    }
+    
+    stage('Test') {
+        docker {
+            image 'qnib/pytest'
+            stage('Test') {
                 sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
             }
             post {
@@ -26,13 +20,12 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
-            agent {
-                docker {
-                    image 'cdrx/pyinstaller-linux:python2'
-                }
-            }
-            steps {
+    }
+    
+    stage('Deliver') {
+        docker {
+            image 'cdrx/pyinstaller-linux:python2'
+            stage('Deliver') {
                 sh 'pyinstaller --onefile sources/add2vals.py'
             }
             post {
