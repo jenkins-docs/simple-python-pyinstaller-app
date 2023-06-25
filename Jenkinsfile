@@ -14,11 +14,6 @@ node {
         docker.image('qnib/pytest').inside('-v /var/run/docker.sock:/var/run/docker.sock') {
             sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
         }
-        post {
-            always {
-                junit 'test-reports/results.xml'
-            }
-        }
     }
 
     stage('Deliver') {
@@ -31,4 +26,9 @@ node {
             }
         }
     }
+        post {
+            always {
+                junit 'test-reports/results.xml'
+            }
+        }
 }
