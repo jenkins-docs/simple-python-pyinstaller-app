@@ -15,20 +15,16 @@ node {
             sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
         }
     }
-        post {
-            success {
-                junit 'test-reports/results.xml'
-            }
-        }
 
     stage('Deliver') {
         docker.image('cdrx/pyinstaller-linux:python2').inside('-v /var/run/docker.sock:/var/run/docker.sock') {
             sh 'pyinstaller --onefile sources/add2vals.py'
         }
+    }
         post {
             success {
+                junit 'test-reports/results.xml'
                 archiveArtifacts 'dist/add2vals'
             }
         }
-    }
 }
