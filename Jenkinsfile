@@ -15,6 +15,11 @@ node {
             sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
         }
     }
+        post {
+            success {
+                junit 'test-reports/results.xml'
+            }
+        }
 
     stage('Deliver') {
         docker.image('cdrx/pyinstaller-linux:python2').inside('-v /var/run/docker.sock:/var/run/docker.sock') {
@@ -26,9 +31,4 @@ node {
             }
         }
     }
-        post {
-            always {
-                junit 'test-reports/results.xml'
-            }
-        }
 }
