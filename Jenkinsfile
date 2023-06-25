@@ -2,7 +2,7 @@ node {
     stage('Build') {
         docker {
             image 'python:2-alpine'
-            stage('Build') {
+            steps('Build') {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py'
             }
         }
@@ -11,7 +11,7 @@ node {
     stage('Test') {
         docker {
             image 'qnib/pytest'
-            stage('Test') {
+            steps('Test') {
                 sh 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
             }
             post {
@@ -25,7 +25,7 @@ node {
     stage('Deliver') {
         docker {
             image 'cdrx/pyinstaller-linux:python2'
-            stage('Deliver') {
+            steps('Deliver') {
                 sh 'pyinstaller --onefile sources/add2vals.py'
             }
             post {
