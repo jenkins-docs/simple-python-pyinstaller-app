@@ -15,12 +15,15 @@ node {
     }
 
     stage('Deploy') {
-        docker.image('python:2-alpine').inside {
-            input message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)'
-        }
-        post {
-            success {
-                archiveArtifacts artifacts: 'dist/*'
+        script {
+            def userInput = input(
+                message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)',
+                submitterParameter: 'proceed'
+            )
+            if (userInput == 'proceed') {
+                docker.image('python:2-alpine').inside {
+                    archiveArtifacts artifacts: 'dist/*', allowEmptyArchive: true
+                }
             }
         }
     }
