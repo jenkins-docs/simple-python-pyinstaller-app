@@ -32,7 +32,9 @@ pipeline {
                     image 'cdrx/pyinstaller-linux:python2'
                 }
             }
-            input(message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)')
+            steps {
+                input(message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)')
+            }
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
