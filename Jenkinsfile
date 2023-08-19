@@ -26,14 +26,13 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy') {
             agent {
                 docker {
                     image 'cdrx/pyinstaller-linux:python2'
                 }
             }
-            input message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)'
+            input(message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)')
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
