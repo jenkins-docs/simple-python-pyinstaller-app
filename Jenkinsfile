@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker {
-                    image 'cdrx/pyinstaller-linux:python2'
+                    image 'python:2-alpine'
                 }
             }
             steps {
