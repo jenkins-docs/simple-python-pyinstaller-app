@@ -33,7 +33,7 @@ pipeline {
                 }
             }
             steps {
-               input message: 'Finished using the web site? (Click "Proceed" to continue)'
+               input message: 'Sudah selesai menggunakan React App? (Klik "Proceed" untuk mengakhiri)'
             }
             post {
                 success {
