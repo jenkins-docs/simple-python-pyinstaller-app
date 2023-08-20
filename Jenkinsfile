@@ -15,12 +15,10 @@ node {
     }
 
     stage('Manual Approval') {
-        script {
-            def userInput = input(
-                message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)',
-                submitterParameter: 'proceed'
-            )
-        }
+        userInput = input(
+            message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)',
+            submitterParameter: 'proceed'
+        )
     }
     stage('Deploy') {
         script {
