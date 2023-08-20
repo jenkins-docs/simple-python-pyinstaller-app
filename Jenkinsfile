@@ -14,12 +14,16 @@ node {
         step([$class: 'JUnitResultArchiver', testResults: 'test-reports/results.xml'])
     }
 
-    stage('Deploy') {
+    stage('Manual Approval') {
         script {
             def userInput = input(
                 message: 'Sudah selesai menggunakan Python App? (Klik "Proceed" untuk mengakhiri)',
                 submitterParameter: 'proceed'
             )
+        }
+    }
+    stage('Deploy') {
+        script {
             if (userInput == 'proceed') {
                 docker.image('python:2-alpine').inside {
                     archiveArtifacts artifacts: 'dist/*', allowEmptyArchive: true
