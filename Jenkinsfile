@@ -21,11 +21,9 @@ node {
         )
     }
     stage('Deploy') {
-        script {
-            if (userInput == 'proceed') {
-                docker.image('python:2-alpine').inside {
-                    archiveArtifacts artifacts: 'dist/*', allowEmptyArchive: true
-                }
+        if (userInput == 'proceed') {
+            docker.image('python:2-alpine').inside {
+                archiveArtifacts artifacts: 'dist/*', allowEmptyArchive: true
             }
         }
     }
