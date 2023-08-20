@@ -21,10 +21,8 @@ node {
         )
     }
     stage('Deploy') {
-        if (userInput == 'proceed') {
-            docker.image('python:2-alpine').inside {
-                archiveArtifacts artifacts: 'dist/*', allowEmptyArchive: true
-            }
+        docker.image('python:2-alpine').inside {
+            archiveArtifacts artifacts: 'dist/*', allowEmptyArchive: false
         }
     }
 }
