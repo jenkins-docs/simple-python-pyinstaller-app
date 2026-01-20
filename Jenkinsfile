@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             agent {
                 dockerContainer {
-                    image 'python:2-alpine'
+                    image 'jenkins/jnlp-agent-python3:latest'
                 }
             }
             steps {
